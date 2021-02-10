@@ -1,0 +1,77 @@
+body{
+    /*background-image: url("/includes/images/specimen2.jpg");*/
+    background-size: cover;
+    min-height: 600px !important;
+    min-width: 950px !important;
+}
+.login-container{
+    margin-top: 10%;
+}
+.login-body
+{
+    background-color: whitesmoke;
+    color: black !important;
+    margin-right: auto;
+    margin-left: auto;
+    height: 600px !important;
+    width: 40%;
+}
+.input
+{
+    margin-top: 15%;
+}
+.gradient
+{
+    color: whitesmoke;
+    filter: grayscale(70%);
+    background-image: linear-gradient(to right, #5433FF, #20BDFF);
+}
+.gradient:hover
+{
+    filter: grayscale(0%);
+    transition: 1.5s;
+}
+.title
+{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+.login-container input:focus{
+    background: none;
+    outline: none !important;
+    text-decoration: none !important;
+}
+.input-light1, .input-light2{
+    position: relative;
+    color: black !important;
+    background: none !important;
+    border: 0 !important;
+    width: 100%;
+    border-bottom: 3px gray solid !important;
+    margin-bottom: 10px;
+    border-radius: 0 !important;
+    font-size: 20px !important;
+    font-family: "Montserrat";
+    z-index: 1 !important;
+}
+.bot-border, .bot-border2{
+    position: relative;
+    top: -13px;
+    border-bottom: 3px #20BDFF solid;
+    width: 0;
+    z-index: 10 !important;
+}
+.input-light1:focus, .input-light2:focus{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+#username-label, #password-label{
+    position: relative;
+    top: 30px;
+    font-family: 'Poppins', sans-serif;
+    z-index: 1 !important;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
