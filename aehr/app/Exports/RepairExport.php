@@ -55,7 +55,7 @@ class RepairExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSi
                         'movement_components.reference_designator as reference_designator',
                         'components.referenceDesignator as referenceDesignator',
                         'typeofservices.typeOfService as typeOfService',
-                        'systemtypes.systemType as systemType'
+                        'systemtypes.systemType as systemType',
                     )
                     ->where('repairrecords.softDeleted', 'no')
                     ->whereBetween('boards.dateReceived', [$this->date['from'], $this->date['to']])
@@ -125,7 +125,7 @@ class RepairExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSi
             $repair->upgradeTime,
             $repair->testTime,
             $repair->repairTime,
-            $repair->shipDate,
+            $repair->dateShipped,
             $repair->outgoingTrackingNumber,
         ];
     }

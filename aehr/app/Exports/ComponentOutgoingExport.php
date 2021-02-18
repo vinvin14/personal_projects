@@ -30,14 +30,13 @@ class ComponentOutgoingExport implements FromQuery, WithStyles, WithHeadings, Wi
                     ->leftJoin('boards', 'boards.id', '=', 'movement_components.rma')
                     ->leftJoin('systemtypes', 'systemtypes.id', '=', 'boards.systemType')
 //                    ->leftJoin('boardtypes', 'boardtypes.id', '=', 'boards.boardType')
-                    ->selectRaw('components.unitPrice * movement_components.quantity')
                     ->select(
                         'movement_components.*',
                         'locations.location as storedIn',
                         'components.partNumber',
                         'components.description',
                         'components.unitPrice',
-                        'totalPrice',
+                        DB::raw('components.unitPrice * movement_components.quantity as movement_compo_total_price'),
 //                        'components.referenceDesignator',
                         'purposes.purpose as purpose',
                         'systemtypes.systemType as systemType',
@@ -89,7 +88,7 @@ class ComponentOutgoingExport implements FromQuery, WithStyles, WithHeadings, Wi
             $components->date_received_released,
             $components->systemType,
             $components->unitPrice,
-            $components->totalPrice,
+            $components->movement_compo_total_price,
             $components->storedIn,
             $components->received_released_by,
         ];

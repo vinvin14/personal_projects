@@ -80,6 +80,18 @@
                 <h5 class="my-3">Generate Consumables Report</h5>
                 <div class="row container">
                     <div class="col-2">
+                        <label for="#to" class="font-weight-bold">Type</label>
+                    </div>
+                    <div class="col-10">
+                        <select name="type" id="" class="form-control" required>
+                            <option value="">-</option>
+                            <option>Incoming</option>
+                            <option>Outgoing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row container mt-3">
+                    <div class="col-2">
                         <label for="#to" class="font-weight-bold">From</label>
                     </div>
                     <div class="col-10">

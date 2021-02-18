@@ -22,14 +22,13 @@ class ComponentIncomingExport implements FromQuery, WithHeadings, WithMapping, S
         return DB::table('movement_components')
                     ->leftJoin('components', 'components.id', '=', 'movement_components.reference')
                     ->leftJoin('locations', 'locations.id', '=', 'components.storedIn')
-                    ->select('components.unitPrice * movement_components.quantity as totalPrice')
                     ->select(
                         'movement_components.*',
                         'locations.location as storedIn',
                         'components.partNumber',
                         'components.description',
                         'components.unitPrice',
-                        'totalPrice'
+                        DB::raw('components.unitPrice * movement_components.quantity as movement_comp_total_price'),
                     )
                     ->whereBetween('movement_components.date_received_released', [$this->date['from'], $this->date['to']])
                     ->where(['type' => 'incoming', 'deleted_at' => null])
@@ -73,7 +72,7 @@ class ComponentIncomingExport implements FromQuery, WithHeadings, WithMapping, S
             $components->invoice_number,
             $components->vendor,
             $components->unitPrice,
-            $components->totalPrice,
+            $components->movement_comp_total_price,
             $components->storedIn,
             $components->received_released_by,
         ];

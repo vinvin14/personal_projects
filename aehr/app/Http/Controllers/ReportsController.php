@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use App\Exports\ComponentIncomingExport;
 use App\Exports\ComponentOutgoingExport;
 use App\Exports\ConsumableExport;
+use App\Exports\ConsumableOutgoingExport;
 use App\Exports\EquipmentExport;
 use App\Exports\RepairExport;
 use App\Exports\ConsignedIncomingExport;
@@ -36,7 +37,16 @@ class ReportsController extends Controller
                 return Excel::download(new RepairExport($request->except('_token')), 'repairs.xlsx');
                 break;
             case 'consumables':
-                return Excel::download(new ConsumableExport($request->except('_token')), 'consumables.xlsx');
+//                return Excel::download(new ConsumableExport($request->except('_token')), 'consumables.xlsx');
+                if($request->input('type') == 'Incoming')
+                {
+                    return Excel::download(new ConsumableExport($request->except('_token')), 'consumables_incoming.xlsx');
+                }
+                else
+                {
+                    return Excel::download(new ConsumableOutgoingExport($request->except('_token')), 'consumables_outgoing.xlsx');
+                }
+                break;
                 break;
             case 'components':
                 if($request->input('type') == 'Incoming')

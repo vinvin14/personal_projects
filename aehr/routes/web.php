@@ -115,10 +115,10 @@ Route::middleware(['access'])->group(function () {
             Route::get('fse/create', 'ReferenceFSEController@create')->name('reference.fse.create');
             Route::post('fse/store', 'ReferenceFSEController@store')->name('reference.fse.store');
 
-            Route::get('/reports', 'ReportsController@index')->name('reports');
-
-            Route::post('/reports/{type}', 'ReportsController@generate')->name('reports.generate');
         });
+        Route::get('/reports', 'ReportsController@index')->name('reports');
+
+        Route::post('/reports/{type}', 'ReportsController@generate')->name('reports.generate');
     });
 
     Route::group(['prefix' => 'resources'], function () {

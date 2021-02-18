@@ -10,11 +10,11 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class ConsumableExport implements FromQuery, WithHeadings,ShouldAutoSize, WithStyles
+class ConsumableOutgoingExport implements FromQuery, WithHeadings,ShouldAutoSize, WithStyles
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     protected  $date;
     public function __construct($date)
     {
@@ -37,10 +37,8 @@ class ConsumableExport implements FromQuery, WithHeadings,ShouldAutoSize, WithSt
                 'consumables.partNumber as partNumber',
                 'consumables.description as description',
                 'movement_consumables.quantity as quantity',
+                'purposes.purpose as movement_purpose',
                 'movement_consumables.date_received_released',
-//                'movement_consumables.month',
-//                'movement_consumables.year',
-                'movement_consumables.invoice_number',
                 'movement_consumables.vendor',
                 'consumables.unitPrice',
                 DB::raw('consumables.unitPrice * movement_consumables.quantity as movement_total_price'),
@@ -48,7 +46,7 @@ class ConsumableExport implements FromQuery, WithHeadings,ShouldAutoSize, WithSt
 //                'purposes.purpose as purpose',
                 'movement_consumables.received_released_by',
                 )
-            ->where(['type' => 'incoming', 'deleted_at' => null])
+            ->where(['type' => 'outgoing', 'deleted_at' => null])
             ->whereBetween('movement_consumables.date_received_released', [$this->date['from'], $this->date['to']])
             ->orderBy('movement_consumables.date_received_released', 'ASC');
     }
@@ -65,15 +63,12 @@ class ConsumableExport implements FromQuery, WithHeadings,ShouldAutoSize, WithSt
             'Part Number',
             'Description',
             'Quantity',
-            'Date Received',
-//            'Month',
-//            'Year',
-            'Invoice Number',
+            'Purpose',
+            'Date Released',
             'Vendor',
             'Unit Price',
             'Total Price',
             'Location',
-//            'Purpose',
             'Received By',
         ];
     }
@@ -83,13 +78,14 @@ class ConsumableExport implements FromQuery, WithHeadings,ShouldAutoSize, WithSt
             $consumable->partNumber,
             $consumable->description,
             $consumable->quantity,
+            $consumable->movement_purpose,
             $consumable->date_received_released,
-            $consumable->invoice_number,
             $consumable->vendor,
             $consumable->unitPrice,
             $consumable->movement_total_price,
             $consumable->location,
             $consumable->received_released_by,
+//            $consumable->purpose,
 
         ];
     }
