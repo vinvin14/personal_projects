@@ -10,6 +10,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\UtilitiesController;
 use App\Models\Boardtype;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BoardTypeController
 {
@@ -100,6 +101,13 @@ class BoardTypeController
             ]);
             return response()->json('Oops something went wrong! Please contact your administrator.', 501);
         }
+    }
+    public function get_existing_partnumber(Request $request)
+    {
+        return DB::table('boardtypes')
+                    ->where('part_number', 'LIKE', '%'.$request->input('keyword').'%')
+                    ->limit(10)
+                    ->get();
     }
     public function destroy($id)
     {

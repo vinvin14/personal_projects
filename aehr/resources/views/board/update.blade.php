@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-3">
                         <small class="font-weight-bold">Description</small>
-                        <input type="text" class="form-control" name="description" value="{{$data['data']->description}}" required>
+                        <input type="text" class="form-control" name="description" value="{{$data['data']->description}}" readonly>
                     </div>
                     <div class="col-3">
                         <small class="font-weight-bold">Serial Number</small>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-3">
                         <small class="font-weight-bold">Part Number</small>
-                        <input type="text" class="form-control" name="partNumber" value="{{$data['data']->partNumber}}" required>
+                        <input type="text" class="form-control" name="partNumber" value="{{$data['data']->partNumber}}" readonly>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -194,15 +194,15 @@
                 <div class="row mt-3">
                     <div class="col-3">
                         <small class="font-weight-bold">Test Time (Hours)</small>
-                        <input type="number" class="form-control" name="testTime" value="{{$data['data']->testTime}}">
+                        <input type="number" class="form-control" step=".01" name="testTime" value="{{$data['data']->testTime}}">
                     </div>
                     <div class="col-3">
                         <small class="font-weight-bold">Repair Time (Hours)</small>
-                        <input type="number" class="form-control" name="repairTime" value="{{$data['data']->repairTime}}">
+                        <input type="number" class="form-control" step=".01" name="repairTime" value="{{$data['data']->repairTime}}">
                     </div>
                     <div class="col-3">
                         <small class="font-weight-bold">Upgrade Time (Hours)</small>
-                        <input type="number" class="form-control" name="upgradeTime" value="{{$data['data']->upgradeTime}}">
+                        <input type="number" class="form-control" step=".01" name="upgradeTime" value="{{$data['data']->upgradeTime}}">
                     </div>
                     <div class="col-3">
                         <small class="font-weight-bold">Status</small>

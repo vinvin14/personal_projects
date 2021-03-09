@@ -20,7 +20,7 @@ class RepairController extends Controller
 
     public function index()
     {
-//        $data = RepairRecords::orderBy('transactionDate', 'ASC')->paginate(10);
+        //$data = RepairRecords::orderBy('transactionDate', 'ASC')->paginate(10);
         $data = DB::table('repairrecords')
                         ->join('customers', 'customers.id', '=', 'repairrecords.customer')
                         ->where('softDeleted', '=', 'no')

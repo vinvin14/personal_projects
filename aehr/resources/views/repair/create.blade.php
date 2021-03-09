@@ -29,6 +29,11 @@
             <form action="{{route('repair.store')}}" method="post">
                 @csrf
                 <div class="form-group">
+                    <label class="font-weight-bold" for="">Part Number</label>
+                    <input type="text" name="part_number" id="part_number" style="text-transform:capitalize"  class="form-control" required>
+                    <div class="bg-light shadow p-2" style="display: none" id="partnumber-suggestion">adfasdfasdf</div>
+                </div>
+                <div class="form-group">
                     <label class="font-weight-bold" for="">Description</label>
                     <input type="text" name="description" style="text-transform:capitalize"  class="form-control" required>
                 </div>
@@ -41,34 +46,6 @@
                         @endforeach
                     </select>
                 </div>
-                {{--<div class="form-group">--}}
-                    {{--<label class="font-weight-bold" for="">Transaction Date</label>--}}
-                    {{--<input type="date" name="transactionDate" class="form-control" required>--}}
-                {{--</div>--}}
-                {{--<div class="form-group">--}}
-                    {{--<label class="font-weight-bold" for="">Received By</label>--}}
-                    {{--<input type="text" name="receivedBy" class="form-control" required>--}}
-                {{--</div>--}}
-                {{--<div class="form-group">--}}
-                    {{--<label class="font-weight-bold" for="">Ship to Customer Name</label>--}}
-                    {{--<input type="text" name="shipToCustomerName" class="form-control">--}}
-                {{--</div>--}}
-                {{--<div class="form-group">--}}
-                    {{--<label class="font-weight-bold" for="">Incoming Tracking</label>--}}
-                    {{--<input type="text" name="incomingTracking" class="form-control">--}}
-                {{--</div>--}}
-                {{--<div class="form-group">--}}
-                    {{--<label class="font-weight-bold" for="">Outgoing Tracking</label>--}}
-                    {{--<input type="text" name="outgoingTracking" class="form-control">--}}
-                {{--</div>--}}
-                {{--<div class="form-group">--}}
-                    {{--<label class="font-weight-bold" for="">Contact Person</label>--}}
-                    {{--<input type="text" name="contactPerson" class="form-control" required>--}}
-                {{--</div>--}}
-                {{--<div class="form-group">--}}
-                    {{--<label class="font-weight-bold" for="">Contact Number</label>--}}
-                    {{--<input type="text" name="remarks" class="form-control" required>--}}
-                {{--</div>--}}
                 <div class="form-group">
                     <label class="font-weight-bold" for="">Remarks</label>
                     <textarea name="remarks" id="" cols="30" rows="10" class="form-control"></textarea>
@@ -98,4 +75,52 @@
         </div>
     </div>
 </div>
+<script>
+    // $('#part_number').on('input', function () {
+    //     var partNumberSuggestion = $('#partnumber-suggestion');
+    //     var input = $(this).val();
+    //     partNumberSuggestion.html('');
+    //     if(input === '') {
+    //         partNumberSuggestion.hide();
+    //     }
+    //     else {
+    //         partNumberSuggestion.show();
+    //         $.ajax({
+    //             url: '/api/boardType/partNumber',
+    //             type: 'post',
+    //             data: {
+    //                 keyword: input
+    //             },
+    //             success: function (data) {
+    //                 console.log(data.length);
+    //                 var result_count = data.length;
+    //                 partNumberSuggestion.html('');
+    //                 if(data.length === 0) {
+    //                     partNumberSuggestion.html('<div class="p-3>No Record(s) Found</div>"');
+    //                 }
+    //                 data.forEach(function (val, index) {
+    //                     // console.log(result_count);
+    //                     partNumberSuggestion.append('<div class="p-2" id="suggestion_part_number">'+val.part_number+'</div>');
+    //                     if((index+1) < result_count) {
+    //                         partNumberSuggestion.append('<div class="border-bottom"></div>')
+    //                     }
+    //
+    //                 });
+    //                 $('div[id="suggestion_part_number"]').on('click', function () {
+    //                     $('#part_number').val($(this).text());
+    //                     partNumberSuggestion.hide();
+    //                 });
+    //
+    //                 partNumberSuggestion.hover(function(){
+    //                     $(this).css("background-color", "yellow");
+    //                 }, function(){
+    //                     $(this).css("background-color", "pink");
+    //                 });
+    //
+    //             }
+    //         });
+    //     }
+    // });
+</script>
 @endsection
+

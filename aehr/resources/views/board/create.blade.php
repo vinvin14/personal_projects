@@ -10,7 +10,7 @@
             max-width: 50%;
         }
     </style>
-    <a href="{{route('repair.show', $data['motherRecord'])}}" class="btn btn-outline mt-1"><i
+    <a href="{{route('repair.show', $data['motherRecord']->id)}}" class="btn btn-outline mt-1"><i
             class="fas fa-arrow-circle-left"></i> Back to Mother Repair Record</a>
     <div class="card mb-3">
         <div class="card-body shadow-sm">
@@ -31,7 +31,7 @@
                 </div>
             @endif
             <h5 class="border-bottom">Create New RMA</h5>
-                <form action="{{route('board.store', $data['motherRecord'])}}" method="post">
+                <form action="{{route('board.store', $data['motherRecord']->id)}}" method="post">
                     @csrf
                     <div class="row mt-3">
                         <div class="col-3">
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Description</small>
-                            <input type="text" class="form-control" name="description" required>
+                            <input type="text" class="form-control" name="description" value="{{$data['motherRecord']->description}}" readonly>
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Serial Number</small>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Part Number</small>
-                            <input type="text" class="form-control" name="partNumber" required>
+                            <input type="text" class="form-control" value="{{$data['motherRecord']->part_number}}" name="partNumber" readonly>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -181,15 +181,15 @@
                     <div class="row mt-3">
                         <div class="col-3">
                             <small class="font-weight-bold">Test Time (Hours)</small>
-                            <input type="number" class="form-control" name="testTime">
+                            <input type="number" class="form-control" step=".01" name="testTime">
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Repair Time (Hours)</small>
-                            <input type="number" class="form-control" name="repairTime">
+                            <input type="number" class="form-control" step=".01" name="repairTime">
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Upgrade Time (Hours)</small>
-                            <input type="number" class="form-control" name="upgradeTime">
+                            <input type="number" class="form-control" step=".01" name="upgradeTime">
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Status</small>
@@ -212,11 +212,11 @@
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Ship To Customer Name</small>
-                            <input type="text" class="form-control" name="shipToCustomerName">
+                            <input type="text" class="form-control" value="{{$data['motherRecord']->customer_name}}" name="shipToCustomerName">
                         </div>
                         <div class="col-3">
                             <small class="font-weight-bold">Address</small>
-                            <textarea name="address" id="" cols="1" rows="1" class="form-control"></textarea>
+                            <textarea name="address" id="" cols="1" rows="1"  class="form-control">@if($data['motherRecord'] != null) {{$data['motherRecord']->customer_address}} @endif</textarea>
                         </div>
 
                     </div>

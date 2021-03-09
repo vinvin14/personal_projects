@@ -33,7 +33,15 @@ class BoardController extends Controller
         $data['locations'] = Location::orderBy('location', 'ASC')->get();
         $data['faultCodes'] = FaultCode::orderBy('code', 'ASC')->get();
         $data['fse'] = FSE::orderBy('lastname', 'ASC')->get();
-        $data['motherRecord'] = $motherRecord;
+        $data['motherRecord'] = DB::table('repairrecords')
+                                        ->join('customers', 'repairrecords.customer', '=', 'customers.id')
+                                        ->select(
+                                            'repairrecords.*',
+                                            'customers.name as customer_name',
+                                            'customers.address as customer_address'
+                                            )
+                                        ->where('repairrecords.id', $motherRecord)
+                                        ->first();
         $data['status'] = DB::table('status')->orderBy('status', 'ASC')->get();
         return view('board.create', ['data' => $data, 'sidebar_selected' => 'Repairs', 'reference_nav_selected' => 'consumables']);
     }
@@ -48,8 +56,13 @@ class BoardController extends Controller
                         ->leftJoin('typeOfServices', 'typeOfServices.id', '=', 'boards.typeOfService')
                         ->leftJoin('status', 'status.id', '=', 'boards.status')
                         ->where('boards.id', $id)
-                        ->select('boards.*', 'repairrecords.description as motherRecordName', 'repairrecords.id as motherRecordID', 'locations.location as location',
-                            'systemTypes.systemType as systemType', 'typeOfServices.typeOfService as typeOfService', 'status.status as status', 'faultcodes.code as faultCode',
+                        ->select('boards.*',
+                            'repairrecords.description as motherRecordName',
+                            'repairrecords.id as motherRecordID',
+                            'locations.location as location',
+                            'systemTypes.systemType as systemType',
+                            'typeOfServices.typeOfService as typeOfService',
+                            'status.status as status', 'faultcodes.code as faultCode',
                             'officer.firstname as firstname', 'officer.middlename as middlename', 'officer.lastname as lastname')
                         ->first();
         $data['components'] = Component::orderBy('description', 'ASC')->get();
@@ -179,7 +192,7 @@ class BoardController extends Controller
         }
         catch (\Exception $exception)
         {
-            dd($exception->getMessage());
+//            dd($exception->getMessage());
             $this->util->createError([
                 $_SESSION['user'],
                 'BOARDADD',

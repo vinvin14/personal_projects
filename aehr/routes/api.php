@@ -75,3 +75,4 @@ Route::get('notifications/info', 'api\NotificationController@notificationInfo')-
 Route::get('resources/consigned/{partNumber}', 'api\ConsignedController@getByPartNum')->name('api.consigned.collection');
 
 Route::get('collect/boards/byDate/{date}', 'api\BoardController@repaired_boards_by_date');
+Route::post('boardType/partNumber', 'api\BoardTypeController@get_existing_partnumber');

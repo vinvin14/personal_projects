@@ -10,6 +10,7 @@ class RepairRecords extends Model
     public $timestamps = false;
     public $table = 'repairrecords';
     protected $fillable = [
+        'part_number',
         'description',
         'type',
         'batch',

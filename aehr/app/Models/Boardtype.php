@@ -9,7 +9,7 @@ class Boardtype extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'boardType',
+        'part_number',
         'description',
         'dateAdded',
         'entryBy',
